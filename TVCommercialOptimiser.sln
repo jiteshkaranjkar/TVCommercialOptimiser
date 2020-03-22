@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TVCommercialOptimiser", "TVCommercialOptimiser\TVCommercialOptimiser.csproj", "{32C7F245-C26F-48C9-A72E-69A8FB1B1C6C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TVCommercialOptimiserTest", "TVCommercialOptimiserTest\TVCommercialOptimiserTest.csproj", "{B5EB9CEA-7642-4A42-A23D-06A53CD2E0F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +15,9 @@ Global
 		{32C7F245-C26F-48C9-A72E-69A8FB1B1C6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32C7F245-C26F-48C9-A72E-69A8FB1B1C6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32C7F245-C26F-48C9-A72E-69A8FB1B1C6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5EB9CEA-7642-4A42-A23D-06A53CD2E0F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5EB9CEA-7642-4A42-A23D-06A53CD2E0F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5EB9CEA-7642-4A42-A23D-06A53CD2E0F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5EB9CEA-7642-4A42-A23D-06A53CD2E0F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

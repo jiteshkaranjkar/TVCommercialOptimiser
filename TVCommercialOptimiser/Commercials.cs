@@ -10,6 +10,8 @@ namespace TVCommercialOptimiser
 {
     public class Commercials
     {
+        private Tuple<string, string, int>[] breakDemographicRatings;
+
         private List<List<Brek>> breaksNestedList;
         List<Brek> breks;
 
@@ -17,6 +19,24 @@ namespace TVCommercialOptimiser
         {
             breaksNestedList = new List<List<Brek>>();
             breks = new List<Brek>();
+            breakDemographicRatings = GetBreakDemographicRatings();
+        }
+
+        public Tuple<string, string, int>[] GetBreakDemographicRatings()
+        {
+            Tuple<string, string, int>[] breakDemographicRatings =
+            {
+                Tuple.Create("Break1", "Women2530", 80),
+                Tuple.Create("Break1", "Men1835", 100),
+                Tuple.Create("Break1", "Total1840", 250),
+                Tuple.Create("Break2", "Women2530", 50),
+                Tuple.Create("Break2", "Men1835", 120),
+                Tuple.Create("Break2", "Total1840", 200),
+                Tuple.Create("Break3", "Women2530", 350),
+                Tuple.Create("Break3", "Men1835", 150),
+                Tuple.Create("Break3", "Total1840", 500),
+            };
+            return breakDemographicRatings;
         }
 
         public void PlaceCommercials()
@@ -24,28 +44,28 @@ namespace TVCommercialOptimiser
             Console.WriteLine("\n Press Enter key to Place commercials in the breaks");
             Console.ReadLine();
 
-            Brek brek1 = new Brek("Break1", CommercialsEnum.Commercial1, CommercialTypeEnum.Automotive, DemographicsEnum.Women2530, 80);
+            Brek brek1 = new Brek(CommercialsEnum.Commercial1, CommercialTypeEnum.Automotive, DemographicsEnum.Women2530, 80);
             breks.Add(brek1);
-            Brek brek2 = new Brek("Break2", CommercialsEnum.Commercial2, CommercialTypeEnum.Travel, DemographicsEnum.Men1835, 100);
+            Brek brek2 = new Brek(CommercialsEnum.Commercial2, CommercialTypeEnum.Travel, DemographicsEnum.Men1835, 100);
             breks.Add(brek2);
-            Brek brek3 = new Brek("Break3", CommercialsEnum.Commercial3, CommercialTypeEnum.Travel, DemographicsEnum.Total1840, 250);
+            Brek brek3 = new Brek(CommercialsEnum.Commercial3, CommercialTypeEnum.Travel, DemographicsEnum.Total1840, 250);
             breks.Add(brek3);
             CalculateRatingsAchieved("Break1", brek1, brek2, brek3);
 
-            Brek brek4 = new Brek("Break4", CommercialsEnum.Commercial4, CommercialTypeEnum.Automotive, DemographicsEnum.Men1835, 50);
+            Brek brek4 = new Brek(CommercialsEnum.Commercial4, CommercialTypeEnum.Automotive, DemographicsEnum.Men1835, 50);
             breks.Add(brek4);
-            Brek brek5 = new Brek("Break5", CommercialsEnum.Commercial5, CommercialTypeEnum.Automotive, DemographicsEnum.Men1835, 120);
+            Brek brek5 = new Brek(CommercialsEnum.Commercial5, CommercialTypeEnum.Automotive, DemographicsEnum.Men1835, 120);
             breks.Add(brek5);
-            Brek brek6 = new Brek("Break6", CommercialsEnum.Commercial6, CommercialTypeEnum.Finance, DemographicsEnum.Women2530, 200);
+            Brek brek6 = new Brek(CommercialsEnum.Commercial6, CommercialTypeEnum.Finance, DemographicsEnum.Women2530, 200);
             breks.Add(brek6);
             CalculateRatingsAchieved("Break2", brek4, brek5, brek6);
 
-            Brek brek7 = new Brek("Break7", CommercialsEnum.Commercial7, CommercialTypeEnum.Finance, DemographicsEnum.Men1835, 350);
+            Brek brek7 = new Brek(CommercialsEnum.Commercial7, CommercialTypeEnum.Finance, DemographicsEnum.Men1835, 350);
             breks.Add(brek7);
 
-            Brek brek8 = new Brek("Break8", CommercialsEnum.Commercial8, CommercialTypeEnum.Automotive, DemographicsEnum.Total1840, 150);
+            Brek brek8 = new Brek(CommercialsEnum.Commercial8, CommercialTypeEnum.Automotive, DemographicsEnum.Total1840, 150);
             breks.Add(brek8);
-            Brek brek9 = new Brek("Break9", CommercialsEnum.Commercial9, CommercialTypeEnum.Travel, DemographicsEnum.Women2530, 500);
+            Brek brek9 = new Brek(CommercialsEnum.Commercial9, CommercialTypeEnum.Travel, DemographicsEnum.Women2530, 500);
             breks.Add(brek9);
             CalculateRatingsAchieved("Break3", brek7, brek8, brek9);
         }
@@ -112,14 +132,33 @@ namespace TVCommercialOptimiser
                     }
                 }
             }
+
+            GetOptimsedRatings(optBreaks1);
+            GetOptimsedRatings(optBreaks2);
+            GetOptimsedRatings(optBreaks3);
+
             breaksNestedList.Add(optBreaks1);
             breaksNestedList.Add(optBreaks2);
             breaksNestedList.Add(optBreaks3);
         }
 
+        public void GetOptimsedRatings(List<Brek> optBreaks)
+        {
+            foreach (Brek brek in optBreaks)
+            {
+                foreach (var breakRatings in breakDemographicRatings)
+                {
+                    if (brek.BreakType.ToString() == breakRatings.Item1 && brek.Demographic.ToString() == breakRatings.Item2)
+                    {
+                        brek.OptimisedRating = breakRatings.Item3;
+                    }
+                }
+            }
+        }
+
         public void AdditionalBonusPoints()
         {
-            Brek brek10 = new Brek("Break10", CommercialsEnum.Commercial10, CommercialTypeEnum.Finance, DemographicsEnum.Total1840, 500);
+            Brek brek10 = new Brek(CommercialsEnum.Commercial10, CommercialTypeEnum.Finance, DemographicsEnum.Total1840, 500);
             breks.Insert(0, brek10);
             breks.RemoveAt(breks.FindIndex(x => x.Rating == 50));
             breaksNestedList = new List<List<Brek>>();
@@ -130,17 +169,20 @@ namespace TVCommercialOptimiser
             Console.WriteLine("\n The optimal rating achieved is");
 
             int totalSum = 0;
+            int totalOptimisedRatingSum = 0;
             foreach (List<Brek> breaks in breaksNestedList)
             {
                 totalSum += breaks.Sum(x => x.Rating);
+                totalOptimisedRatingSum += breaks.Sum(x => x.OptimisedRating);
                 foreach (Brek brek in breaks)
                 {
-                    Console.WriteLine($" This is {brek.BreakType} with {brek.Commercial} of type {brek.CommercialType} with Demographic {brek.Demographic} and rating {brek.Rating}");
+                    Console.WriteLine($" This is {brek.BreakType} with {brek.Commercial} of type {brek.CommercialType} with Demographic {brek.Demographic} and rating {brek.Rating} and Optimised rating {brek.OptimisedRating}");
                 }
                 Console.WriteLine($" In {breaks[0].BreakType} Maximum Total ratings of the three commercials is {breaks.Sum(x => x.Rating)}");
                 Console.WriteLine("\n");
             }
             Console.WriteLine($" So Total ratings is {totalSum}");
+            Console.WriteLine($" So Total Optimised Ratings is {totalOptimisedRatingSum}");
         }
     }
 }

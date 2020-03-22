@@ -6,16 +6,17 @@ namespace TVCommercialOptimiser
 {
     public class Brek
     {
-        public string BreakName { get; set; }
+        //public string BreakName { get; set; }
         public BreakTypesEnum BreakType { get; set; }
         public DemographicsEnum Demographic { get; set; }
         public int Rating { get; set; }
+        public int OptimisedRating { get; set; }
         public CommercialsEnum Commercial { get; set; }
         public CommercialTypeEnum CommercialType { get; set; }
 
-        public Brek(string name, CommercialsEnum commercial, CommercialTypeEnum commercialType, DemographicsEnum demo, int rating)
+        public Brek(CommercialsEnum commercial, CommercialTypeEnum commercialType, DemographicsEnum demo, int rating)
         {
-            BreakName = name;
+            //BreakName = name;
             BreakType = BreakTypesEnum.NoBreak;
             Demographic = demo;
             Rating = rating;
@@ -47,24 +48,7 @@ namespace TVCommercialOptimiser
                             flag = false;
                         }
                     }
-
-                    //if (breaks[index + 1].CommercialType == CommercialType)
-                    //{
-                    //    flag = false;
-                    //}
-
-                    //else if (index > -1 && (index - 1) == 0)
-                    //{
-                    //    if (breaks[index + 1].CommercialType == CommercialType)
-                    //    {
-                    //        flag = false;
-                    //    }
-                    //}
                 }
-                //if (index + 2 >= 3)
-                //{
-                //    flag = false;
-                //}
             }
 
             return flag;
