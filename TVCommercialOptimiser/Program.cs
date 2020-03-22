@@ -9,6 +9,10 @@ namespace TVCommercialOptimiser
             Console.WriteLine(" -- Welcome to TV Commercial Optimiser! -- ");
             Commercials commercials = new Commercials();
 
+
+            Console.WriteLine("\n Press Enter key to Place commercials in the breaks");
+            Console.ReadLine();
+
             //Place 3 commercials in each of the breaks with no violations of the restrictions
             commercials.PlaceCommercials();
             Console.WriteLine("\n Press Enter key to start Optimisation");
@@ -30,8 +34,6 @@ namespace TVCommercialOptimiser
 
             //Print the final placement structure along with the sum of the ratings achieved
             commercials.PrintPlacementStructure();
-
-            //return;
         }
 
 

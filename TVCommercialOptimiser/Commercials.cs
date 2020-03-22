@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
-using System.Runtime.ExceptionServices;
-using System.Security.Cryptography.X509Certificates;
 
 namespace TVCommercialOptimiser
 {
@@ -12,8 +8,8 @@ namespace TVCommercialOptimiser
     {
         private Tuple<string, string, int>[] breakDemographicRatings;
 
-        private List<List<Brek>> breaksNestedList;
-        List<Brek> breks;
+        public List<List<Brek>> breaksNestedList;
+        public List<Brek> breks;
 
         public Commercials()
         {
@@ -39,11 +35,11 @@ namespace TVCommercialOptimiser
             return breakDemographicRatings;
         }
 
+        /// <summary>
+        /// Create commercials with the given details
+        /// </summary>
         public void PlaceCommercials()
         {
-            Console.WriteLine("\n Press Enter key to Place commercials in the breaks");
-            Console.ReadLine();
-
             Brek brek1 = new Brek(CommercialsEnum.Commercial1, CommercialTypeEnum.Automotive, DemographicsEnum.Women2530, 80);
             breks.Add(brek1);
             Brek brek2 = new Brek(CommercialsEnum.Commercial2, CommercialTypeEnum.Travel, DemographicsEnum.Men1835, 100);
@@ -70,11 +66,25 @@ namespace TVCommercialOptimiser
             CalculateRatingsAchieved("Break3", brek7, brek8, brek9);
         }
 
+        /// <summary>
+        /// Calculate the sum of the ratings achieved by all placed commercials
+        /// </summary>
+        /// <param name="breakName">Break Name</param>
+        /// <param name="brek1">Break with First commercials and given ratings</param>
+        /// <param name="brek2">Break with Second commercials and given ratings</param>
+        /// <param name="brek3">Break with Third commercials and given ratings</param>
         public void CalculateRatingsAchieved(string breakName, Brek brek1, Brek brek2, Brek brek3)
         {
             Console.WriteLine($"In {breakName} Total ratings of the three commercials before optimisation is {brek1.Rating + brek2.Rating + brek3.Rating}");
         }
 
+        /// <summary>
+        /// Place 3 commercials in each of the breaks with no violations of the given restrictions
+        /// Find the optimal placement that maximises the total ratings
+        /// </summary>
+        /// <param name="break1Cap">Capacity of Break 1</param>
+        /// <param name="break2Cap">Capacity of Break 2</param>
+        /// <param name="break3Cap">Capacity of Break 3</param>
         public void ValidateMaximiseTotalRatings(int break1Cap, int break2Cap, int break3Cap)
         {
             List<Brek> optBreaks1 = new List<Brek>(break1Cap);
@@ -142,6 +152,10 @@ namespace TVCommercialOptimiser
             breaksNestedList.Add(optBreaks3);
         }
 
+        /// <summary>
+        /// Get Optimsed Ratings based on the data given and the mapping between the Demographic and Ratings
+        /// </summary>
+        /// <param name="optBreaks">collection of the Break 1/2/3 to add Oprimised ratings into it</param>
         public void GetOptimsedRatings(List<Brek> optBreaks)
         {
             foreach (Brek brek in optBreaks)
@@ -156,6 +170,9 @@ namespace TVCommercialOptimiser
             }
         }
 
+        /// <summary>
+        /// additional commercial to get Bonus points with the same given conditions
+        /// </summary>
         public void AdditionalBonusPoints()
         {
             Brek brek10 = new Brek(CommercialsEnum.Commercial10, CommercialTypeEnum.Finance, DemographicsEnum.Total1840, 500);
@@ -164,6 +181,9 @@ namespace TVCommercialOptimiser
             breaksNestedList = new List<List<Brek>>();
         }
 
+        /// <summary>
+        /// Print all the Data with normal ratings and Optimised ratings
+        /// </summary>
         public void PrintPlacementStructure()
         {
             Console.WriteLine("\n The optimal rating achieved is");

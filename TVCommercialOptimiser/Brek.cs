@@ -6,7 +6,6 @@ namespace TVCommercialOptimiser
 {
     public class Brek
     {
-        //public string BreakName { get; set; }
         public BreakTypesEnum BreakType { get; set; }
         public DemographicsEnum Demographic { get; set; }
         public int Rating { get; set; }
@@ -16,7 +15,6 @@ namespace TVCommercialOptimiser
 
         public Brek(CommercialsEnum commercial, CommercialTypeEnum commercialType, DemographicsEnum demo, int rating)
         {
-            //BreakName = name;
             BreakType = BreakTypesEnum.NoBreak;
             Demographic = demo;
             Rating = rating;
@@ -24,6 +22,7 @@ namespace TVCommercialOptimiser
             CommercialType = commercialType;
         }
 
+        //Commercials of the same type cannot be next to each other within a break
         public bool BreakSameTypeCommercials(List<Brek> breaks, int breakCapacity)
         {
             bool flag = true;
