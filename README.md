@@ -1,11 +1,13 @@
-# TV Commercial Optimiser
-This is a Console application implemented using c#, .Net core 
+﻿# TV Commercial Optimiser
+- This is a Console application implemented using c#, .Net core
+
 
 ## Structure
 - Program.cs file to kick start the application
 - Commercials.cs file which has Break Creation metod calls and Commercial placement logic
 - Brek.cs file has Break creation and validation
 - enum.cs has the Enums
+- Test Project - Basic Unit test using xunint to showcase unit test implementation
 
 ## Requirements
 - Visual Studio
